@@ -30,23 +30,25 @@
   #back.show { opacity: 1; pointer-events: auto; }
 
   #floors { position: fixed; left: 22px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 14px; }
-  .floor { width: 250px; padding: 12px 14px 14px; text-align: left; cursor: pointer; color: #c9cbe6;
+  .floor { width: 230px; padding: 12px 14px; text-align: left; cursor: pointer; color: #c9cbe6;
     background: rgba(16,18,36,.72); border: 2px solid rgba(255,255,255,.12); border-radius: 12px;
     backdrop-filter: blur(6px); box-shadow: 0 4px 14px rgba(0,0,0,.3); transition: background .2s, border-color .2s; }
   .floor:hover { background: rgba(36,38,66,.8); }
-  .floor .head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 9px; }
-  .floor .head b { font-size: 26px; font-weight: 800; line-height: 1; color: #8f93d8; }
+  .floor .head { display: flex; align-items: baseline; gap: 10px; }
+  .floor .head b { width: 40px; flex: none; font-size: 26px; font-weight: 800; line-height: 1; color: #8f93d8; }
   .floor .head span { font-size: 14px; font-weight: 600; }
   .floor .head em { margin-left: auto; font-style: normal; font-size: 12px; opacity: .7; }
-  .floor .chips { display: flex; flex-wrap: wrap; gap: 5px; }
-  .floor .chip { font-size: 12px; padding: 4px 9px; border-radius: 999px; background: rgba(255,255,255,.1); transition: all .15s; }
-  .floor .chip:hover { background: #e5177e; color: #fff; }
   .floor.active { background: #fff; color: #333; border-color: #e5177e; }
   .floor.active .head b { color: #4b4fa8; }
-  .floor.active .chip { background: #eef0fb; color: #4b4fa8; }
-  .floor.active .chip:hover { background: #e5177e; color: #fff; }
 
   /* Hover tag: purple arrow badge + white name plate */
+  #loading { position: fixed; top: 22px; left: 50%; z-index: 5; transform: translate(-50%, -12px); display: flex; align-items: center; gap: 10px;
+    padding: 9px 16px; border-radius: 999px; background: rgba(16,18,36,.78); border: 2px solid rgba(255,255,255,.12); color: #e6e7f5;
+    font-size: 13.5px; backdrop-filter: blur(6px); opacity: 0; pointer-events: none; transition: opacity .4s, transform .4s; }
+  #loading.show { opacity: 1; transform: translate(-50%, 0); }
+  #loading b { font-weight: 600; min-width: 46px; }
+  #loading i { width: 120px; height: 5px; border-radius: 3px; background: rgba(255,255,255,.15); overflow: hidden; }
+  #loading em { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #7a7ee6, #e5177e); transition: width .3s; }
   #tag { position: fixed; display: flex; align-items: center; pointer-events: none; opacity: 0; transition: opacity .15s; }
   #tag.show { opacity: 1; }
   #tag .fl { width: 70px; height: 74px; background: #4b4fa8; color: #fff; font-weight: 800; font-size: 24px;
@@ -97,7 +99,25 @@
   #walkHud.paused .paused { display: block; }
   #exitWalk { position: absolute; top: 18px; right: 22px; pointer-events: auto; padding: 10px 18px; font-family: inherit; font-size: 15px;
     font-weight: 600; color: #fff; background: linear-gradient(180deg, #ff5f9e, #e5177e); border: 2px solid #fff; border-radius: 4px; cursor: pointer; }
-  body.walking #floors, body.walking #card, body.walking #back, body.walking #walk, body.walking #houses { display: none; }
+  body.walking #floors, body.walking #card, body.walking #back, body.walking #walk, body.walking #houses, body.walking #planBtn { display: none; }
+  #planBtn { position: fixed; top: 88px; right: 22px; z-index: 5; padding: 9px 16px; border-radius: 10px; cursor: pointer;
+    font-family: inherit; font-size: 14px; font-weight: 600; color: #fff; background: rgba(16,18,36,.72);
+    border: 2px solid rgba(255,255,255,.18); backdrop-filter: blur(6px); box-shadow: 0 4px 14px rgba(0,0,0,.3); }
+  #planBtn::before { content: ''; display: inline-block; width: 14px; height: 11px; margin-right: 8px; border: 2px solid #8f93d8;
+    border-radius: 2px; vertical-align: -1px; background: linear-gradient(90deg, transparent 45%, #8f93d8 45% 55%, transparent 55%); }
+  #planBtn:hover { background: rgba(36,38,66,.85); }
+  #plan { position: fixed; inset: 0; z-index: 20; display: none; align-items: center; justify-content: center; padding: 24px;
+    background: rgba(8,9,20,.82); backdrop-filter: blur(4px); }
+  #plan.show { display: flex; }
+  #plan .sheet { display: flex; flex-direction: column; width: min(1500px, 100%); max-height: 100%; background: #fff; border-radius: 12px;
+    overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  #plan header { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-bottom: 1px solid #e6e3ee; }
+  #plan header b { flex: 1; font-size: 15px; color: #2d2d30; }
+  #plan header a { font-size: 13.5px; font-weight: 600; color: #4b4fa8; text-decoration: none; }
+  #plan header .x { width: 34px; height: 34px; border: 0; border-radius: 8px; background: #f1f0f6; font-size: 22px; cursor: pointer; color: #555; }
+  #plan .scroll { overflow: auto; }
+  #plan img { display: block; width: 100%; cursor: zoom-in; }
+  #plan img.zoom { width: auto; max-width: none; cursor: zoom-out; }
   #houses { position: fixed; top: 18px; right: 22px; z-index: 5; display: flex; gap: 6px; padding: 5px; border-radius: 14px;
     background: rgba(16,18,36,.72); border: 2px solid rgba(255,255,255,.12); backdrop-filter: blur(6px); box-shadow: 0 4px 14px rgba(0,0,0,.3); }
   #houses a { padding: 7px 14px; border-radius: 10px; color: #c9cbe6; text-decoration: none; line-height: 1.15; }
@@ -110,7 +130,7 @@
   @media (max-width: 700px) {
     #title h1 { font-size: 28px; }
     #floors { top: auto; bottom: 16px; left: 16px; transform: none; flex-direction: row; }
-    .floor { width: auto; padding: 8px 12px; } .floor .chips, .floor .head span, .floor .head em { display: none; } .floor .head { margin: 0; }
+    .floor { width: auto; padding: 8px 12px; } .floor .head span, .floor .head em { display: none; }
     #card { right: 16px; bottom: 90px; }
   }
 </style>
@@ -125,10 +145,18 @@
 <div id="bg"><i></i><i></i><i></i></div>
 <button id="back" title="Back to house">«</button>
 <nav id="houses"></nav>
+<button id="planBtn" hidden>Floor plan</button>
+<div id="plan">
+  <div class="sheet">
+    <header><b></b><a target="_blank" rel="noopener">Open full size ↗</a><button class="x" title="Close">×</button></header>
+    <div class="scroll"><img alt="Floor plan"></div>
+  </div>
+</div>
 <nav id="floors">
 </nav>
 <button id="walk">Walk this floor</button>
 <div id="tag"><div class="fl"></div><div class="nm"></div></div>
+<div id="loading"><span>Loading furniture</span><b>0 / 0</b><i><em></em></i></div>
 <div id="card"><small></small><h2></h2><p></p><ul class="items"></ul><div class="total"><span>Total</span><b></b></div><button id="close">« Back to house</button></div>
 <div id="walkHud">
   <div class="cross"></div>
@@ -144,6 +172,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
 
@@ -306,9 +335,26 @@ const R = { faceZ: 0, faceX: Math.PI / 2, faceNegX: -Math.PI / 2, faceNegZ: Math
 
 // ---------- Catalog models (GLBs downloaded from the Livinit catalog into assets/models) ----------
 const catalog = await fetch('assets/models/manifest.json').then(r => r.json()).catch(() => ({}));
-const gltfLoader = new GLTFLoader().setDRACOLoader(
-  new DRACOLoader().setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/gltf/'));
+// Models are meshopt-compressed with WebP textures (gltf-transform optimize); Draco kept for older files
+const gltfLoader = new GLTFLoader()
+  .setMeshoptDecoder(MeshoptDecoder)
+  .setDRACOLoader(new DRACOLoader().setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/draco/gltf/'));
 const templates = new Map();
+
+// "Loading furniture 3 / 26" pill while model files download
+const loadingEl = document.getElementById('loading');
+const loads = { total: 0, done: 0 };
+function trackLoad(promise) {
+  loads.total++;
+  const update = () => {
+    loadingEl.querySelector('b').textContent = `${loads.done} / ${loads.total}`;
+    loadingEl.querySelector('em').style.width = `${(loads.done / loads.total) * 100}%`;
+    loadingEl.classList.toggle('show', loads.done < loads.total);
+  };
+  update();
+  promise.finally(() => { loads.done++; update(); }).catch(() => {});
+  return promise;
+}
 
 // Same as the Livinit viewer: which raw model axis faces front for each `front_view`.
 function frontViewToYaw(fv) { return [-Math.PI / 2, 0, Math.PI / 2, Math.PI][(fv ?? 0) % 4]; }
@@ -317,7 +363,7 @@ function frontViewToYaw(fv) { return [-Math.PI / 2, 0, Math.PI / 2, Math.PI][(fv
 function loadModel(slot) {
   if (!templates.has(slot)) {
     const info = catalog[slot];
-    templates.set(slot, gltfLoader.loadAsync(info.file).then(gltf => {
+    templates.set(slot, trackLoad(gltfLoader.loadAsync(info.file)).then(gltf => {
       const lights = [];
       gltf.scene.traverse(o => {
         if (o.isLight) lights.push(o);
@@ -843,6 +889,7 @@ HOUSES.family = {
 HOUSES.adu = {
   title: 'ADU · Plan B',
   subtitle: '1 floor · 1,200 sf',
+  plan: { src: 'assets/plans/adu-plan-b.png', title: 'County of San Diego · Detached ADU, Plan B (1,200 sf) · Sheet A1' },
   floorNames: ['Ground floor'],
   walkStart: ['Living & dining'],
   rooms: [
@@ -1252,6 +1299,25 @@ for (const [key, h] of Object.entries(HOUSES)) {
   a.innerHTML = `<b>${h.title}</b><span>${h.subtitle}</span>`;
   document.getElementById('houses').append(a);
 }
+// Source floor plan viewer (only for houses traced from a plan); click the image to zoom to full size
+const planEl = document.getElementById('plan'), planImg = planEl.querySelector('img');
+function showPlan(open) {
+  planEl.classList.toggle('show', open);
+  if (!open) planImg.classList.remove('zoom');
+}
+if (HOUSE.plan) {
+  const btn = document.getElementById('planBtn');
+  btn.hidden = false;
+  btn.onclick = () => {
+    if (!planImg.src) planImg.src = HOUSE.plan.src;
+    showPlan(true);
+  };
+  planEl.querySelector('b').textContent = HOUSE.plan.title;
+  planEl.querySelector('a').href = HOUSE.plan.src;
+  planEl.querySelector('.x').onclick = () => showPlan(false);
+  planEl.onclick = e => { if (e.target === planEl) showPlan(false); };
+  planImg.onclick = () => planImg.classList.toggle('zoom');
+}
 const FLOOR_NAMES = HOUSE.floorNames;
 const floorsNav = document.getElementById('floors');
 for (let f = floors.length - 1; f >= 0; f--) {
@@ -1259,18 +1325,7 @@ for (let f = floors.length - 1; f >= 0; f--) {
   card.className = 'floor';
   card.dataset.floor = f;
   const list = rooms.filter(r => r.floor === f);
-  card.innerHTML = `<div class="head"><b>${f + 1}F</b><span>${FLOOR_NAMES[f]}</span><em>${list.length} rooms</em></div><div class="chips"></div>`;
-  for (const r of list) {
-    const chip = document.createElement('span');
-    chip.className = 'chip';
-    chip.textContent = r.name;
-    chip.onclick = e => {
-      e.stopPropagation();
-      if (activeFloor !== f) showFloor(f);
-      focusRoom(r);
-    };
-    card.querySelector('.chips').append(chip);
-  }
+  card.innerHTML = `<div class="head"><b>${f + 1}F</b><span>${FLOOR_NAMES[f]}</span><em>${list.length} rooms</em></div>`;
   floorsNav.append(card);
 }
 const floorBtns = [...floorsNav.children];
@@ -1372,6 +1427,10 @@ floorBtns.forEach(b => b.onclick = () => showFloor(Number(b.dataset.floor)));
 backEl.onclick = goHome;
 document.getElementById('close').onclick = goHome;
 addEventListener('keydown', e => {
+  if (planEl.classList.contains('show')) {
+    if (e.key === 'Escape') showPlan(false);
+    return;
+  }
   if (walk.on) {
     if (e.key === 'Escape' && !plc.isLocked) stopWalk();
     walk.keys.add(e.code);

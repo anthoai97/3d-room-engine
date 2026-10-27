@@ -11,10 +11,10 @@ An interactive 3D dollhouse for exploring a home room by room, built with [three
 
 ## Run it
 
-Any static file server works; the page loads three.js from a CDN.
+The site is plain static files in `public/`; the page loads three.js from a CDN.
 
 ```sh
-python3 -m http.server 5173
+npm run dev   # or: python3 -m http.server 5173 -d public
 # open http://localhost:5173
 ```
 
@@ -27,7 +27,7 @@ Two sample houses are included. Switch with the selector at the top right, or by
 
 ## Adding a house
 
-Houses live in the `HOUSES` object in `index.html`. Each one has:
+Houses live in the `HOUSES` object in `public/index.html`. Each one has:
 
 - `rooms`: `{ name, floor, pts, floorTex, outdoor?, desc, build(g) }`. `pts` is the room outline in metres as `[x, z]` points; `build` places furniture with the `F.*` helpers (or catalog models with `F.glb`).
 - `openings`: doors and windows on room edges, `{ floor, type, x, z, w, ... }` with `type` one of `window`, `door` (`swing`: the room it opens into), `pass` (open doorway; `head: WALL_H` for no lintel), `glass` (full-height sliding door) or `pony` (low bar wall).
@@ -35,7 +35,7 @@ Houses live in the `HOUSES` object in `index.html`. Each one has:
 
 ## Catalog furniture models
 
-Furniture can use real product models (`.glb`) from `assets/models/`, listed in `assets/models/manifest.json`:
+Furniture can use real product models (`.glb`) from `public/assets/models/`, listed in `public/assets/models/manifest.json`:
 
 ```json
 {

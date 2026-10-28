@@ -1,0 +1,592 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "default": "",
+      "type": "string"
+    },
+    "units": {
+      "default": "m",
+      "description": "Unit of every length in this file. The house is centred automatically",
+      "type": "string",
+      "enum": [
+        "m",
+        "ft"
+      ]
+    },
+    "furniture": {
+      "default": "catalog",
+      "description": "catalog: real products where the catalog has them. placeholder: simple built-in models for everything, no products or prices (houses from the floor plan pipeline, before furniture is chosen)",
+      "type": "string",
+      "enum": [
+        "catalog",
+        "placeholder"
+      ]
+    },
+    "plan": {
+      "description": "Source floor plan, shown with the Floor plan button",
+      "type": "object",
+      "properties": {
+        "src": {
+          "type": "string",
+          "description": "Image in public/, e.g. assets/plans/x.png"
+        },
+        "title": {
+          "type": "string"
+        },
+        "bounds": {
+          "description": "Pixel box [left, top, right, bottom] of the house outline in the image, to overlay it on the plan preview",
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "items": false,
+          "minItems": 4,
+          "maxItems": 4
+        }
+      },
+      "required": [
+        "src",
+        "title"
+      ],
+      "additionalProperties": false
+    },
+    "floors": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "walkStart": {
+            "description": "Room that walk mode starts in",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "rooms": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Shown on hover and in the room card; unique on its floor"
+          },
+          "floor": {
+            "default": 0,
+            "description": "0 = ground floor",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "pts": {
+            "minItems": 3,
+            "type": "array",
+            "items": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "description": "Outline in house coordinates, in order around the room. Neighbouring rooms share edges exactly"
+          },
+          "type": {
+            "description": "Room kind. When `items` is left out, the room is furnished automatically for this kind",
+            "type": "string",
+            "enum": [
+              "living",
+              "dining",
+              "kitchen",
+              "bedroom",
+              "bath",
+              "laundry",
+              "office",
+              "hall",
+              "entry",
+              "closet",
+              "game",
+              "outdoor",
+              "other"
+            ]
+          },
+          "floorTex": {
+            "description": "Default: wood indoors, tile for bath/laundry, deck outdoors",
+            "type": "string",
+            "enum": [
+              "wood",
+              "tile",
+              "deck"
+            ]
+          },
+          "outdoor": {
+            "description": "Terrace or balcony: low walls with a glass rail, no ceiling (default: true for type \"outdoor\")",
+            "type": "boolean"
+          },
+          "desc": {
+            "default": "",
+            "description": "One or two sentences for the room card",
+            "type": "string"
+          },
+          "items": {
+            "description": "Furniture, placed in order; items can only refer to ids listed before them",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "item": {
+                  "type": "string",
+                  "enum": [
+                    "sofa",
+                    "loveseat",
+                    "armchair",
+                    "coffee_table",
+                    "side_table",
+                    "tv_stand",
+                    "tv",
+                    "bookcase",
+                    "console_table",
+                    "floor_lamp",
+                    "table_lamp",
+                    "sectional",
+                    "ottoman",
+                    "bench",
+                    "piano",
+                    "beanbag",
+                    "bed_queen",
+                    "bed_full",
+                    "bed_king",
+                    "closet_rod",
+                    "bed_twin",
+                    "nightstand",
+                    "dresser",
+                    "wardrobe",
+                    "clothes_rack",
+                    "basket",
+                    "desk",
+                    "office_chair",
+                    "dining_table",
+                    "dining_chair",
+                    "dining_table_rect",
+                    "bar_stool",
+                    "chair",
+                    "counter",
+                    "range",
+                    "island",
+                    "fridge",
+                    "wall_cabinets",
+                    "base_cabinet",
+                    "kitchen_sink",
+                    "dishwasher",
+                    "toilet",
+                    "sink",
+                    "bathtub",
+                    "shower",
+                    "shower_stall",
+                    "washer",
+                    "washer_dryer",
+                    "water_heater",
+                    "shelf",
+                    "outdoor_table",
+                    "outdoor_chair",
+                    "outdoor_lounge",
+                    "planter",
+                    "vase",
+                    "bowl",
+                    "sculpture",
+                    "rug",
+                    "frames",
+                    "clock",
+                    "stairs",
+                    "stairwell"
+                  ],
+                  "description": "What to place: a key from the item registry (npm run items)"
+                },
+                "id": {
+                  "description": "Name for this item, so later items can be placed relative to it",
+                  "type": "string"
+                },
+                "wall": {
+                  "description": "Back against this wall of the room, facing into the room",
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "N",
+                        "E",
+                        "S",
+                        "W"
+                      ]
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    }
+                  ]
+                },
+                "corner": {
+                  "description": "Into this corner (or the corner at pts[i]), back and left side against the two walls",
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "NE",
+                        "NW",
+                        "SE",
+                        "SW"
+                      ]
+                    },
+                    {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 9007199254740991
+                    }
+                  ]
+                },
+                "at": {
+                  "description": "Free-standing at [x, z] (house coordinates) or the room centre",
+                  "anyOf": [
+                    {
+                      "type": "array",
+                      "prefixItems": [
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ],
+                      "items": false,
+                      "minItems": 2,
+                      "maxItems": 2
+                    },
+                    {
+                      "type": "string",
+                      "const": "center"
+                    }
+                  ]
+                },
+                "on": {
+                  "description": "Standing on top of the item with this id",
+                  "type": "string"
+                },
+                "beside": {
+                  "description": "Next to the item with this id, lined up with its back",
+                  "type": "string"
+                },
+                "front": {
+                  "description": "In front of the item with this id, facing it",
+                  "type": "string"
+                },
+                "around": {
+                  "description": "Spread around the item with this id, facing it (chairs at a table); one entry places `count` copies",
+                  "type": "string"
+                },
+                "under": {
+                  "description": "Rugs: centred under these items, sized to cover them",
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  ]
+                },
+                "along": {
+                  "description": "wall: 0 = at the start corner (west or north end) ... 1 = at the end corner. Omit to take the free spot nearest the middle",
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "offset": {
+                  "description": "wall: distance from the start corner to the near side of the item",
+                  "type": "number"
+                },
+                "gap": {
+                  "description": "Space between this item and the wall / the item it is placed against. Negative tucks in (chair under a desk)",
+                  "type": "number"
+                },
+                "side": {
+                  "description": "beside: which side of the other item — a compass side (easiest), or left / right as seen standing in front of it",
+                  "type": "string",
+                  "enum": [
+                    "left",
+                    "right",
+                    "N",
+                    "E",
+                    "S",
+                    "W"
+                  ]
+                },
+                "count": {
+                  "description": "around: how many (default 4)",
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 12
+                },
+                "face": {
+                  "description": "Override which way the front points: N/E/S/W, or the id of an item to look at",
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "N",
+                        "E",
+                        "S",
+                        "W"
+                      ]
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "rot": {
+                  "description": "Extra turn in degrees, counter-clockwise seen from above",
+                  "type": "number"
+                },
+                "y": {
+                  "description": "Height of the bottom of the item (wall decor, shelves)",
+                  "type": "number"
+                },
+                "shift": {
+                  "description": "Final nudge [dx, dz] in house coordinates",
+                  "type": "array",
+                  "prefixItems": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "number"
+                    }
+                  ],
+                  "items": false,
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                "scale": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "w": {
+                  "description": "Width, for resizable items (rug, kitchen, wardrobe, desk, stairs)",
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "d": {
+                  "description": "Depth, for resizable items",
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "color": {
+                  "description": "Swatch name or #rrggbb, for colorable items drawn with the built-in model",
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "enum": [
+                        "stone",
+                        "linen",
+                        "oat",
+                        "cloud",
+                        "mist",
+                        "sand",
+                        "cream",
+                        "white",
+                        "grey",
+                        "charcoal",
+                        "green",
+                        "indigo",
+                        "pink",
+                        "violet",
+                        "plaid"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^#[0-9a-fA-F]{6}$"
+                    }
+                  ]
+                },
+                "rail": {
+                  "description": "stairs: side of the glass rail",
+                  "type": "string",
+                  "enum": [
+                    "left",
+                    "right"
+                  ]
+                },
+                "flip": {
+                  "description": "Mirror it left-right (sectional: chaise on the left as seen from the front)",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "item"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "name",
+          "pts"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "openings": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "door",
+              "window",
+              "pass",
+              "glass",
+              "pony"
+            ],
+            "description": "door: hinged door (a pair when wider than 1.2 m; sliding doors into a closet 1 m or wider); window; pass: open doorway; glass: full-height sliding glass door; pony: low bar wall (1.15 m)"
+          },
+          "floor": {
+            "description": "Needed only when the room name exists on more than one floor",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "w": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Width of the opening"
+          },
+          "between": {
+            "description": "On the wall shared by these two rooms. A door opens into the second one",
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "items": false,
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "room": {
+            "description": "On a wall of this room (usually an outside wall); use with `wall`",
+            "type": "string"
+          },
+          "wall": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "N",
+                  "E",
+                  "S",
+                  "W"
+                ]
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            ]
+          },
+          "x": {
+            "description": "Exact centre on a room edge, with z",
+            "type": "number"
+          },
+          "z": {
+            "type": "number"
+          },
+          "along": {
+            "description": "0 = near the start corner (west / north end) ... 1 = near the end. Default: centred",
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "offset": {
+            "description": "Distance from the start corner to the near side of the opening",
+            "type": "number"
+          },
+          "swing": {
+            "description": "door: the room the door opens into (default: the second `between` room, or `room`)",
+            "type": "string"
+          },
+          "sill": {
+            "description": "window: height of the sill (default 0.8 m)",
+            "type": "number"
+          },
+          "head": {
+            "description": "Height of the top of the opening (door 2.05 m, window 2.0 m)",
+            "type": "number"
+          },
+          "full": {
+            "description": "pass: full wall height, no header above",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "type",
+          "w"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "title",
+    "floors",
+    "rooms"
+  ],
+  "additionalProperties": false,
+  "title": "House",
+  "description": "A house for the 3D room engine. See docs/house-format.md."
+}

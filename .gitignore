@@ -3,5 +3,10 @@ public/assets/models/
 demo/
 
 node_modules/
+out/
+pipeline/jobs/
+dist/
 .env*
 .DS_Store
+.agents/
+.claude/

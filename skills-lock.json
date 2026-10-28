@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "skills": {
+    "code-simplification": {
+      "source": "../tools/skills",
+      "sourceType": "local",
+      "computedHash": "dd476637e1978e7e23ec16577998b10c8b86c16305638b3651c6c4e82975432c"
+    },
+    "grilling": {
+      "source": "../tools/skills",
+      "sourceType": "local",
+      "computedHash": "d3520b1284e3bb12bb79fe2de0702452a0e10946130a43f409e1248508475c59"
+    },
+    "issue-investigation": {
+      "source": "../tools/skills",
+      "sourceType": "local",
+      "computedHash": "900baad3a19a2874fb9577c6e9f0ca68007a32d4f676edc745dd98fc8a982d55"
+    },
+    "issue-planning": {
+      "source": "../tools/skills",
+      "sourceType": "local",
+      "computedHash": "88b283e3c3ab3ea58c96f104810fe15acb845f140a84b0ae87de0c8ba4dfb4c7"
+    },
+    "orchestrate-implementation": {
+      "source": "../tools/skills",
+      "sourceType": "local",
+      "computedHash": "64869de8d13beda4465d1fe9a3f10a253ae4f0207173b0bf9e542a62860f28a0"
+    },
+    "principles": {
+      "source": "../tools/skills",
+      "sourceType": "local",
+      "computedHash": "980dd93034dff824a54cee9dc153fd37f5a8890e2a459fedff914a69c6455cd4"
+    },
+    "technical-writing": {
+      "source": "../tools/skills",
+      "sourceType": "local",
+      "computedHash": "f9222e9dc83c5e95983a823e86813c6dea45aeaf8a59150bf8bdaac924330bef"
+    },
+    "typescript-best-practices": {
+      "source": "../tools/skills",
+      "sourceType": "local",
+      "computedHash": "9e5075704e424a82842bc11a2ebd6f45776805431ee748cbd4d3093d5b95bd78"
+    },
+    "unslop": {
+      "source": "../tools/skills",
+      "sourceType": "local",
+      "computedHash": "7e31f83634666ae267ee82cb49a9b236a67824a55be01cf70cc5d01cac552c46"
+    },
+    "worktree-cleanup": {
+      "source": "../tools/skills",
+      "sourceType": "local",
+      "computedHash": "8343e609a95a24dcd15dc05796dc067d18ac2a9fdbf95f3fbc7dabc59d2d2098"
+    }
+  }
+}

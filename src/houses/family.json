@@ -1,0 +1,219 @@
+{
+  "$schema": "../../house.schema.json",
+  "title": "Family home",
+  "subtitle": "2 floors · 12 rooms",
+  "units": "m",
+  "floors": [
+    { "name": "Ground floor", "walkStart": "Entrance" },
+    { "name": "Upper floor", "walkStart": "Hallway" }
+  ],
+  "rooms": [
+    {
+      "name": "Living room", "floor": 0, "type": "living",
+      "pts": [[-1, -5], [5, -5], [5, 1.5], [1.5, 1.5], [1.5, -1], [-1, -1]],
+      "desc": "Sofa, TV, coffee table, bookshelf, a piano corner and glass doors to the terrace.",
+      "items": [
+        { "item": "tv_stand", "id": "tv-stand", "wall": "W", "along": 0.36 },
+        { "item": "tv", "on": "tv-stand" },
+        { "item": "sofa", "id": "sofa", "front": "tv-stand", "gap": 2.0 },
+        { "item": "coffee_table", "id": "coffee", "front": "sofa", "gap": 0.4 },
+        { "item": "bowl", "on": "coffee" },
+        { "item": "rug", "under": ["sofa", "coffee"], "gap": 0.15, "color": "stone" },
+        { "item": "bookcase", "wall": "N", "along": 0.83 },
+        { "item": "frames", "wall": "N", "scale": 0.9 },
+        { "item": "piano", "wall": "E", "along": 0.78 },
+        { "item": "floor_lamp", "corner": "SW" },
+        { "item": "planter", "corner": "SE" },
+        { "item": "planter", "corner": "NE", "scale": 0.8 }
+      ]
+    },
+    {
+      "name": "Kitchen", "floor": 0, "type": "kitchen",
+      "pts": [[-6, -5], [-1, -5], [-1, -1], [-6, -1]],
+      "desc": "Kitchen counter, stove, fridge, a round dining table for four and an archway to the living room.",
+      "items": [
+        { "item": "counter", "id": "counter", "wall": "N", "along": 0.59, "w": 2.6 },
+        { "item": "fridge", "beside": "counter", "side": "right" },
+        { "item": "wall_cabinets", "wall": "N" },
+        { "item": "dining_table", "id": "table", "at": [-3.4, -2.4] },
+        { "item": "vase", "on": "table" },
+        { "item": "dining_chair", "around": "table", "count": 4 },
+        { "item": "planter", "corner": "SW", "scale": 0.75 }
+      ]
+    },
+    {
+      "name": "Bathroom", "floor": 0, "type": "bath",
+      "pts": [[-6, -1], [-1, -1], [-1, 1.8], [-6, 1.8]],
+      "desc": "Bathtub under the window, toilet, sink with mirror and a washing machine.",
+      "items": [
+        { "item": "bathtub", "wall": "W" },
+        { "item": "toilet", "id": "toilet", "wall": "N", "along": 0.34 },
+        { "item": "sink", "wall": "N", "along": 0.58 },
+        { "item": "washer", "wall": "N", "along": 0.98 },
+        { "item": "rug", "front": "toilet", "gap": 0.4, "w": 0.7, "d": 0.9, "color": "mist" }
+      ]
+    },
+    {
+      "name": "Study", "floor": 0, "type": "office",
+      "pts": [[-6, 1.8], [-1, 1.8], [-1, 4.5], [-6, 4.5]],
+      "desc": "Quiet study with a writing desk, bookcase, reading armchair, side table and lamp.",
+      "items": [
+        { "item": "desk", "id": "desk", "wall": "N", "along": 0.2 },
+        { "item": "office_chair", "front": "desk", "gap": 0.05 },
+        { "item": "bookcase", "id": "bookcase", "wall": "N", "along": 0.66 },
+        { "item": "floor_lamp", "beside": "bookcase", "side": "right", "gap": 0.1 },
+        { "item": "armchair", "id": "armchair", "wall": "E", "along": 0.85 },
+        { "item": "side_table", "id": "side", "front": "armchair", "gap": 0.3 },
+        { "item": "sculpture", "on": "side" },
+        { "item": "rug", "under": ["armchair", "side"], "gap": 0.2, "color": "stone" },
+        { "item": "planter", "corner": "SW", "scale": 0.7 }
+      ]
+    },
+    {
+      "name": "Entrance", "floor": 0, "type": "entry",
+      "pts": [[-1, -1], [1.5, -1], [1.5, 4.5], [-1, 4.5]],
+      "desc": "Front door, stairs up to 2F, a console table with a lamp and a long rug.",
+      "items": [
+        { "item": "stairs", "wall": "E", "face": "S", "along": 0.92, "rail": "left" },
+        { "item": "console_table", "id": "console", "wall": "E", "along": 0.15 },
+        { "item": "table_lamp", "on": "console", "shift": [0, 0.35] },
+        { "item": "vase", "on": "console", "shift": [0, -0.3] },
+        { "item": "rug", "at": [-0.3, 3.0], "w": 0.8, "d": 2.2, "color": "linen" },
+        { "item": "planter", "corner": "NW", "scale": 0.75 }
+      ]
+    },
+    {
+      "name": "Terrace", "floor": 0, "type": "outdoor", "outdoor": true,
+      "pts": [[1.5, 1.5], [5, 1.5], [5, 4.5], [1.5, 4.5]],
+      "desc": "Wooden deck with a chaise lounge, a marble bistro table for two and plants.",
+      "items": [
+        { "item": "outdoor_lounge", "wall": "E", "face": "S", "gap": 0.2, "along": 0.68 },
+        { "item": "outdoor_table", "id": "table", "at": [2.3, 3.35] },
+        { "item": "outdoor_chair", "around": "table", "count": 2 },
+        { "item": "planter", "corner": "NW", "scale": 0.9 },
+        { "item": "planter", "corner": "NE", "scale": 0.8 },
+        { "item": "planter", "wall": "S", "scale": 0.8 }
+      ]
+    },
+
+    {
+      "name": "Guest room", "floor": 1, "type": "bedroom",
+      "pts": [[-6, -5], [0, -5], [0, -2.8], [-1.5, -2.8], [-1.5, -1.2], [-6, -1.2]],
+      "desc": "Two upholstered twin beds, a nightstand with a lamp, a desk nook and a soft rug.",
+      "items": [
+        { "item": "bed_twin", "id": "bed-a", "wall": "N", "along": 0.29 },
+        { "item": "nightstand", "id": "ns", "beside": "bed-a", "side": "right" },
+        { "item": "table_lamp", "on": "ns" },
+        { "item": "bed_twin", "beside": "ns", "side": "right" },
+        { "item": "rug", "front": "bed-a", "gap": 0.1, "w": 1.6, "d": 0.9, "color": "oat" },
+        { "item": "desk", "id": "desk", "wall": "N", "along": 1 },
+        { "item": "office_chair", "front": "desk", "gap": 0.05 },
+        { "item": "planter", "corner": 2, "scale": 0.6 }
+      ]
+    },
+    {
+      "name": "My room", "floor": 1, "type": "bedroom",
+      "pts": [[0, -5], [5, -5], [5, 1.5], [2.5, 1.5], [2.5, -1.2], [0, -1.2]],
+      "desc": "Queen bed, nightstand with lamp, desk, dresser, green rug, loveseat, clothes rack and a door to the balcony.",
+      "items": [
+        { "item": "bed_queen", "id": "bed", "wall": "E", "along": 0.22, "color": "plaid" },
+        { "item": "nightstand", "id": "ns", "beside": "bed", "side": "left" },
+        { "item": "table_lamp", "on": "ns" },
+        { "item": "rug", "under": "bed", "color": "green" },
+        { "item": "desk", "id": "desk", "wall": "N", "along": 0 },
+        { "item": "office_chair", "front": "desk", "gap": 0.05 },
+        { "item": "clock", "wall": "N", "along": 0.1 },
+        { "item": "dresser", "id": "dresser", "wall": "W", "along": 0.5 },
+        { "item": "sculpture", "on": "dresser", "shift": [0, -0.25] },
+        { "item": "vase", "on": "dresser", "shift": [0, 0.25] },
+        { "item": "loveseat", "wall": 3, "along": 0.15 },
+        { "item": "clothes_rack", "wall": "E", "along": 0.86 },
+        { "item": "basket", "corner": "SE" }
+      ]
+    },
+    {
+      "name": "Hallway", "floor": 1, "type": "hall",
+      "pts": [[-1.5, -2.8], [0, -2.8], [0, -1.2], [2.5, -1.2], [2.5, 1.5], [1.5, 1.5], [1.5, 4.5], [-1, 4.5], [-1, -1.2], [-1.5, -1.2]],
+      "desc": "Connects every room on 2F: a lounge corner with a loveseat, round coffee table, picture frames and the stairs down.",
+      "items": [
+        { "item": "stairwell", "at": [0.84, 2.9] },
+        { "item": "loveseat", "id": "loveseat", "wall": 3 },
+        { "item": "coffee_table", "id": "coffee", "front": "loveseat", "gap": 0.15 },
+        { "item": "bowl", "on": "coffee" },
+        { "item": "rug", "under": ["loveseat", "coffee"], "gap": 0.2, "color": "cloud" },
+        { "item": "frames", "wall": "E" },
+        { "item": "planter", "corner": 1, "scale": 0.6 },
+        { "item": "planter", "corner": "SW", "scale": 0.6 }
+      ]
+    },
+    {
+      "name": "Bathroom", "floor": 1, "type": "bath",
+      "pts": [[-6, -1.2], [-1, -1.2], [-1, 1.8], [-6, 1.8]],
+      "desc": "Glass shower, bathtub, toilet, sink and a washing machine.",
+      "items": [
+        { "item": "shower", "corner": "NW" },
+        { "item": "bathtub", "wall": "S", "along": 0.2 },
+        { "item": "toilet", "wall": "N", "along": 0.38 },
+        { "item": "sink", "id": "sink", "wall": "N", "along": 0.63 },
+        { "item": "washer", "wall": "N", "along": 0.98 },
+        { "item": "rug", "front": "sink", "gap": 0.3, "w": 0.7, "d": 1.0, "color": "mist" }
+      ]
+    },
+    {
+      "name": "Game room", "floor": 1, "type": "game",
+      "pts": [[-6, 1.8], [-1, 1.8], [-1, 4.5], [-6, 4.5]],
+      "desc": "Gaming room: 55\" TV with bean bags, a gaming desk with a desk chair and a bookcase of collectibles.",
+      "items": [
+        { "item": "tv_stand", "id": "tv-stand", "wall": "N", "along": 0.56 },
+        { "item": "tv", "on": "tv-stand" },
+        { "item": "rug", "front": "tv-stand", "gap": 0.4, "w": 2.4, "d": 1.4, "color": "indigo" },
+        { "item": "beanbag", "front": "tv-stand", "gap": 0.9, "shift": [-0.5, 0], "color": "pink" },
+        { "item": "beanbag", "front": "tv-stand", "gap": 0.9, "shift": [0.5, 0], "color": "violet" },
+        { "item": "desk", "id": "desk", "wall": "W", "along": 0.84 },
+        { "item": "office_chair", "front": "desk", "gap": 0.05 },
+        { "item": "bookcase", "wall": "E", "along": 0.95 },
+        { "item": "planter", "corner": "NW", "scale": 0.6 }
+      ]
+    },
+    {
+      "name": "Balcony", "floor": 1, "type": "outdoor", "outdoor": true,
+      "pts": [[1.5, 1.5], [5, 1.5], [5, 4.5], [1.5, 4.5]],
+      "desc": "Balcony with a marble bistro table for two and lots of plants.",
+      "items": [
+        { "item": "outdoor_table", "id": "table", "at": [2.4, 3.2] },
+        { "item": "outdoor_chair", "around": "table", "count": 2 },
+        { "item": "planter", "corner": "NE", "scale": 0.7 },
+        { "item": "planter", "corner": "SW", "scale": 0.7 },
+        { "item": "planter", "corner": "SE", "scale": 0.8 }
+      ]
+    }
+  ],
+  "openings": [
+    { "type": "window", "room": "Living room", "wall": "N", "offset": 0.9, "w": 1.6 },
+    { "type": "window", "room": "Living room", "wall": "E", "offset": 1.3, "w": 1.4 },
+    { "type": "window", "room": "Kitchen", "wall": "W", "offset": 1.9, "w": 1.2 },
+    { "type": "window", "room": "Bathroom", "floor": 0, "wall": "W", "offset": 0.95, "w": 0.9, "sill": 1.3 },
+    { "type": "window", "room": "Study", "wall": "W", "offset": 0.8, "w": 1.2 },
+    { "type": "window", "room": "Study", "wall": "S", "offset": 1.7, "w": 1.6 },
+    { "type": "door", "room": "Entrance", "wall": "S", "offset": 0.175, "w": 0.95 },
+    { "type": "pass", "between": ["Kitchen", "Living room"], "offset": 2.9, "w": 1.0 },
+    { "type": "door", "between": ["Living room", "Entrance"], "wall": "S", "offset": 0.975, "w": 0.85 },
+    { "type": "door", "between": ["Entrance", "Bathroom"], "floor": 0, "offset": 1.5, "w": 0.8 },
+    { "type": "door", "between": ["Entrance", "Study"], "offset": 0.4, "w": 0.8 },
+    { "type": "glass", "between": ["Living room", "Terrace"], "offset": 0.9, "w": 1.6 },
+
+    { "type": "window", "room": "Guest room", "wall": "W", "offset": 1.85, "w": 1.1 },
+    { "type": "window", "room": "Guest room", "wall": "N", "offset": 2.35, "w": 1.0, "sill": 1.2 },
+    { "type": "window", "room": "My room", "wall": "N", "offset": 1.8, "w": 1.4 },
+    { "type": "window", "room": "My room", "wall": "E", "offset": 3.1, "w": 1.0, "sill": 0.9 },
+    { "type": "window", "room": "Bathroom", "floor": 1, "wall": "W", "offset": 1.15, "w": 0.9, "sill": 1.3 },
+    { "type": "window", "room": "Game room", "wall": "W", "offset": 0.15, "w": 0.9 },
+    { "type": "window", "room": "Game room", "wall": "S", "offset": 1.9, "w": 1.6 },
+    { "type": "window", "room": "Hallway", "wall": "S", "offset": 0.3, "w": 1.0 },
+    { "type": "door", "between": ["Hallway", "Guest room"], "wall": "W", "offset": 0.4, "w": 0.8 },
+    { "type": "door", "between": ["Hallway", "My room"], "wall": "N", "offset": 0.275, "w": 0.85 },
+    { "type": "door", "between": ["Hallway", "Bathroom"], "floor": 1, "wall": "W", "offset": 1.4, "w": 0.8 },
+    { "type": "door", "between": ["Hallway", "Game room"], "offset": 0.4, "w": 0.8 },
+    { "type": "glass", "between": ["My room", "Balcony"], "offset": 0.3, "w": 1.6 }
+  ]
+}
